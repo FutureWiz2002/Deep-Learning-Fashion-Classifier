@@ -35,6 +35,11 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dense(512, activation=tf.nn.relu), #creates 128 level of neural networks
     tf.keras.layers.Dense(512, activation=tf.nn.relu),
     tf.keras.layers.Dense(512, activation=tf.nn.relu),
+    tf.keras.layers.Dense(256, activation=tf.nn.relu),   
+    tf.keras.layers.Dense(128, activation=tf.nn.relu),
+    tf.keras.layers.Dense(64, activation=tf.nn.relu),
+    tf.keras.layers.Dense(32, activation=tf.nn.relu),
+
     tf.keras.layers.Dense(10, activation=tf.nn.softmax) #softmax produces probability distribution 
 ])
 
