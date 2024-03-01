@@ -1,0 +1,2 @@
+model_checkpoint_path: "assets"
+all_model_checkpoint_paths: "assets"

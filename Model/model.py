@@ -51,7 +51,11 @@ BATCH_SIZE = 32 #Batch size is the number of iterations the neural network does 
 train_dataset = train_dataset.cache().repeat().shuffle(num_train_examples).batch(BATCH_SIZE) #Updates dataset with batch included
 test_dataset = test_dataset.cache().batch(BATCH_SIZE)
 
-model.fit(train_dataset, epochs=10, steps_per_epoch=math.ceil(num_test_examples/32)) # This trains the model 
+cp_callback = tf.keras.callbacks.ModelCheckpoint(filepath="assets",
+                                                 save_weights_only=True,
+                                                 verbose=1)
+
+model.fit(train_dataset, epochs=10, steps_per_epoch=math.ceil(num_test_examples/32), callbacks=[cp_callback]) # This trains the model 
 
 test_loss, test_accuracy = model.evaluate(test_dataset, steps=math.ceil(num_test_examples/32))
 print('Accuracy on test dataset:', test_accuracy)
