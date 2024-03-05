@@ -32,3 +32,23 @@ model.load_weights(checkpoint_path)
 
 test_loss, test_accuracy = model.evaluate(test_dataset, steps=math.ceil(num_test_examples/32))
 print("Restored model, accuracy: {:5.2f}%".format(100 * test_accuracy))
+
+
+import cv2 
+import numpy as np
+
+img = cv2.imread("../shirt_test_image.jpg", cv2.IMREAD_GRAYSCALE)
+
+test_img = [img]
+test_img = [np.expand_dims(img, axis=0) for img in test_img]
+
+# It is better to have a single tensor instead of a list of tensors, therefore,
+# before resizing the images concatenate all them in a tensor
+test_img = tf.concat(test_img, axis=0)
+test_img = tf.image.resize(test_img, [28, 28]).shape.as_list()
+
+print(test_img)
+# predictions = model.predict(test_img)
+
+# predictions.shape
+# print(np.argmax(predictions[0]))
